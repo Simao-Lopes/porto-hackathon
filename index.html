@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PORTO // A STEP FORWARD — 3-DAY OFF-SITE & BUILD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080808;
+      --fg: #f4f4f0;
+      --muted: #8a8a86;
+      --border: #262626;
+      --border-strong: #f4f4f0;
+      --surface: #111111;
+      --font-display: 'Syne', sans-serif;
+      --font-serif: 'Instrument Serif', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f4f0;
+      --fg: #080808;
+      --muted: #5a5a55;
+      --border: #d4d4ce;
+      --border-strong: #080808;
+      --surface: #eaeae4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-mono);
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    body {
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: inherit;
+    }
+
+    /* Top Navigation Bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--fg);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.25; transform: scale(0.85); }
+    }
+
+    .topbar-nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .topbar-nav a {
+      position: relative;
+      padding: 0.2rem 0;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .topbar-nav a:hover {
+      color: var(--fg);
+    }
+
+    .topbar-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-btn {
+      border: 1px solid var(--border-strong);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    /* Marquee */
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      border-bottom: 1px solid var(--border);
+      background: var(--fg);
+      color: var(--bg);
+      padding: 0.55rem 0;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: scroll 30s linear infinite;
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 5rem 2rem 4rem;
+      border-bottom: 1px solid var(--border);
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem;
+    }
+
+    .meta-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.35rem;
+    }
+
+    .meta-item strong {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .hero-title-wrap {
+      padding: 4rem 0 3rem;
+    }
+
+    .hero-kicker {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 9.5vw, 9.2rem);
+      font-weight: 800;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-title em {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: -0.01em;
+      padding-right: 0.08em;
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 3rem;
+      align-items: end;
+      padding-top: 2rem;
+    }
+
+    .hero-lead {
+      font-size: 1.02rem;
+      line-height: 1.65;
+      color: var(--fg);
+      max-width: 640px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+    }
+
+    .stat-box {
+      padding: 1.25rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-box:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* Section Header */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 3.5rem 2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+    }
+
+    .section-index {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+    }
+
+    /* Day Sections */
+    .day-section {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .day-sidebar {
+      padding: 3rem 2rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .day-sidebar-sticky {
+      position: sticky;
+      top: 5rem;
+    }
+
+    .day-badge {
+      display: inline-block;
+      border: 1px solid var(--border-strong);
+      padding: 0.25rem 0.6rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .day-number {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 800;
+      line-height: 0.85;
+      letter-spacing: -0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .day-name {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 2.3rem;
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+
+    .day-summary {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .day-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    /* Timeline Items */
+    .day-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .event-row {
+      display: grid;
+      grid-template-columns: 160px 1fr auto;
+      gap: 2rem;
+      padding: 2.25rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.2s ease;
+      align-items: start;
+    }
+
+    .event-row:last-child {
+      border-bottom: none;
+    }
+
+    .event-row:hover {
+      background: var(--surface);
+    }
+
+    .event-row.highlight {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .event-row.highlight .event-time,
+    .event-row.highlight .event-desc,
+    .event-row.highlight .event-pill {
+      color: var(--bg);
+      border-color: var(--bg);
+    }
+
+    .event-row.highlight .event-desc {
+      opacity: 0.88;
+    }
+
+    .event-time {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.25rem;
+    }
+
+    .event-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .event-title em {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.65rem;
+    }
+
+    .event-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      max-width: 680px;
+      line-height: 1.65;
+    }
+
+    .event-pill {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.65rem;
+      white-space: nowrap;
+      align-self: start;
+    }
+
+    /* Sub-grid inside event */
+    .sub-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .sub-card {
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .sub-card-num {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .sub-card-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    .sub-card-text {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Interactive Squad Randomizer Section */
+    .interactive-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .interactive-panel {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .interactive-panel:last-child {
+      border-right: none;
+    }
+
+    .panel-kicker {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .panel-desc {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .textarea-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.9rem;
+      min-height: 110px;
+      margin-bottom: 1rem;
+      resize: vertical;
+      outline: none;
+    }
+
+    .textarea-input:focus {
+      border-color: var(--fg);
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--fg);
+      color: var(--bg);
+      padding: 0.75rem 1.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border: 1px solid var(--fg);
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background: transparent;
+      color: var(--fg);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .results-grid.five-cols {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .result-box {
+      border: 1px solid var(--border);
+      padding: 1rem;
+      background: var(--surface);
+    }
+
+    .result-box h4 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-box ul {
+      list-style: none;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .result-box li {
+      padding: 0.2rem 0;
+    }
+
+    /* Banner */
+    .manifesto {
+      padding: 5rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .manifesto-quote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      max-width: 980px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .manifesto-sub {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 980px) {
+      .topbar {
+        grid-template-columns: 1fr auto;
+      }
+      .topbar-nav {
+        display: none;
+      }
+      .hero-meta,
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-bottom {
+        grid-template-columns: 1fr;
+      }
+      .day-section {
+        grid-template-columns: 1fr;
+      }
+      .day-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .event-row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 1.75rem;
+      }
+      .sub-cards,
+      .interactive-grid,
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+      .interactive-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="status-dot"></span>
+      <a href="https://maps.app.goo.gl/HMCohYQSuffw9U947" target="_blank" rel="noopener noreferrer">SAVVY SIGNATURE // R. DO SOL 162, PORTO ↗</a>
+    </div>
+    <nav class="topbar-nav">
+      <a href="#day-01">01 / Arrival &amp; Penthouses</a>
+      <a href="#day-02">02 / A Step Forward</a>
+      <a href="#day-03">03 / Pitch &amp; Ship</a>
+      <a href="#randomizer">04 / Team Draw</a>
+    </nav>
+    <div class="topbar-right">
+      <a class="theme-btn" href="https://maps.app.goo.gl/HMCohYQSuffw9U947" target="_blank" rel="noopener noreferrer">HQ MAP ↗</a>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle Contrast">INVERT [B/W]</button>
+    </div>
+  </header>
+
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-track">
+      &nbsp;// SAVVY SIGNATURE APARTMENTS (RUA DO SOL 162) // CHICO DOS PRESUNTOS &amp; CONGA // MERCADO DO BOLHÃO // PENTHOUSE KITCHEN BATTLE // "A STEP FORWARD" // 4 SQUADS // MAD PIZZA FESTIVAL // 5 MIN PITCH + 5 MIN Q&amp;A // STRAIGHT TO PROD // INSPARYA PORTO // SAVVY SIGNATURE APARTMENTS (RUA DO SOL 162) // CHICO DOS PRESUNTOS &amp; CONGA // MERCADO DO BOLHÃO // PENTHOUSE KITCHEN BATTLE // "A STEP FORWARD" // 4 SQUADS // MAD PIZZA FESTIVAL // 5 MIN PITCH + 5 MIN Q&amp;A // STRAIGHT TO PROD // INSPARYA PORTO
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span>Format</span>
+        <strong>Teambuilding &amp; Build Sprint</strong>
+      </div>
+      <div class="meta-item">
+        <span>Crew</span>
+        <strong>16 People // 4 Squads</strong>
+      </div>
+      <div class="meta-item">
+        <span>Basecamp (2 Penthouses)</span>
+        <strong><a href="https://maps.app.goo.gl/HMCohYQSuffw9U947" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Savvy Signature · R. do Sol 162 ↗</a></strong>
+      </div>
+      <div class="meta-item">
+        <span>Demo Format</span>
+        <strong>5m Pitch + 5m Q&amp;A → Prod</strong>
+      </div>
+    </div>
+
+    <div class="hero-title-wrap">
+      <span class="hero-kicker">Porto Off-Site // 03 Days</span>
+      <h1 class="hero-title">
+        A STEP <em>Forward</em><br />
+        IN PORTO.
+      </h1>
+    </div>
+
+    <div class="hero-bottom">
+      <p class="hero-lead">
+        Three days in Porto combining authentic local tascas, a 3-course penthouse cooking showdown, daily PT body activations, and a hands-on product build where every squad pairs Tech Guides with cross-functional teammates to ship real features straight to production.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="stat-num">16</div>
+          <div class="stat-label">Teammates</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">04</div>
+          <div class="stat-label">Build Squads</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">10m</div>
+          <div class="stat-label">Kickoff Brief</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">5+5</div>
+          <div class="stat-label">Pitch &amp; Q&amp;A</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Schedule -->
+  <main class="container">
+    <div class="section-header">
+      <h2 class="section-title">The 3-Day Itinerary</h2>
+      <span class="section-index">[ SCHEDULE // DAY 01 — DAY 03 ]</span>
+    </div>
+
+    <!-- DAY 01 -->
+    <section class="day-section" id="day-01">
+      <aside class="day-sidebar">
+        <div class="day-sidebar-sticky">
+          <span class="day-badge">Day 01 // Arrival &amp; Table</span>
+          <div class="day-number">D—01</div>
+          <h3 class="day-name">Tascas, Bolhão &amp; The Penthouse Feast</h3>
+          <p class="day-summary">
+            Arrive in Porto and head straight for classic street food. Draw our 3 dinner squads, grab fresh ingredients during a relaxed walk through town, unwind at the heated pool, and take over the two penthouse kitchens for a 3-course dinner.
+          </p>
+          <div class="day-tags">
+            <span class="tag">Chico dos Presuntos</span>
+            <span class="tag">Conga / Gazela</span>
+            <span class="tag">Mercado do Bolhão</span>
+            <span class="tag">Heated Pool</span>
+            <span class="tag">2 Penthouses</span>
+            <span class="tag">3 Kitchen Squads</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="day-content">
+        <article class="event-row">
+          <div class="event-time">Midday // 12:30</div>
+          <div>
+            <h4 class="event-title">Traditional Porto Tasca Lunch</h4>
+            <p class="event-desc">
+              Touch down in Porto and kick off with a genuine, no-frills local lunch. We’ll decide on the spot between stacked cured ham &amp; sheep-cheese sandwiches at <strong><a href="https://www.google.com/maps/search/?api=1&query=Casa+dos+Presuntos+Xico+Rua+do+Heroismo+191+Porto" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Chico dos Presuntos (“O Xico” · Rua do Heroísmo 191 ↗)</a></strong>, spicy cauldron bifanas at <strong><a href="https://www.google.com/maps/search/?api=1&query=Conga+Casa+das+Bifanas+Rua+do+Bonjardim+318+Porto" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Conga (Rua do Bonjardim 318 ↗)</a></strong>, or crispy cachorrinhos at <strong><a href="https://www.google.com/maps/search/?api=1&query=Cervejaria+Gazela+Travessa+Cimo+de+Vila+4+Porto" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Gazela (Travessa Cimo de Vila 4 ↗)</a></strong>. Right after lunch, we draw the 3 random teams for tonight’s dinner challenge.
+            </p>
+          </div>
+          <span class="event-pill">Street Tradition</span>
+        </article>
+
+        <article class="event-row">
+          <div class="event-time">Afternoon // 14:30</div>
+          <div>
+            <h4 class="event-title">Downtown Walk &amp; Market Run</h4>
+            <p class="event-desc">
+              A relaxed walk through downtown Porto passing by <strong>Mercado do Bolhão</strong> (9 min from the apartments) and nearby grocers on Rua Formosa so each dinner squad can pick up fresh ingredients along the way. Coming from abroad? Bring a local recipe or flavor from home into your team’s course.
+            </p>
+          </div>
+          <span class="event-pill">Walk &amp; Shop</span>
+        </article>
+
+        <article class="event-row">
+          <div class="event-time">Late Afternoon // 16:30</div>
+          <div>
+            <h4 class="event-title">Check-In at Savvy Signature &amp; Heated Pool</h4>
+            <p class="event-desc">
+              Arrive at <strong><a href="https://maps.app.goo.gl/HMCohYQSuffw9U947" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Savvy Signature Apartments (Rua do Sol 162)</a></strong>, settle into the rooms, stock the fridges in the two penthouses, and enjoy the heated indoor pool, sauna, hot tub, game/cinema room, and terraces before dinner prep begins.
+            </p>
+          </div>
+          <span class="event-pill">Unwind</span>
+        </article>
+
+        <article class="event-row">
+          <div class="event-time">Evening // 19:30</div>
+          <div>
+            <h4 class="event-title">The 3-Course Penthouse Cook-Off</h4>
+            <p class="event-desc">
+              With our two spacious penthouse kitchens and terraces at Savvy Signature, our 3 randomly drawn squads take over the stoves (with the <strong>Main Courses</strong> squad always having the largest crew). Each team owns their course from shopping bag to plate.
+            </p>
+            <div class="sub-cards">
+              <div class="sub-card">
+                <span class="sub-card-num">SQUAD 01 // 5 PEOPLE</span>
+                <div class="sub-card-title">Entrées</div>
+                <p class="sub-card-text">Open the evening. Appetizers, small plates, and local specialties to kick off dinner.</p>
+              </div>
+              <div class="sub-card">
+                <span class="sub-card-num">SQUAD 02 // 6 PEOPLE (LARGEST)</span>
+                <div class="sub-card-title">Main Courses</div>
+                <p class="sub-card-text">The largest crew on the biggest job: the centerpiece dish for all 16 people.</p>
+              </div>
+              <div class="sub-card">
+                <span class="sub-card-num">SQUAD 03 // 5 PEOPLE</span>
+                <div class="sub-card-title">Desserts</div>
+                <p class="sub-card-text">Sweet finishers and late-night treats to carry the penthouse table into the night.</p>
+              </div>
+            </div>
+          </div>
+          <span class="event-pill">Penthouse Kitchens</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- DAY 02 -->
+    <section class="day-section" id="day-02">
+      <aside class="day-sidebar">
+        <div class="day-sidebar-sticky">
+          <span class="day-badge">Day 02 // The Build</span>
+          <div class="day-number">D—02</div>
+          <h3 class="day-name">“A Step Forward” &amp; Hands-On Shipping</h3>
+          <p class="day-summary">
+            Early breakfast, PT-led body activation, and a 10-minute keynote. Then we split into 4 squads—each guided by our Tech Devs with our dev pipeline ready to go—so everyone experiences building something real from scratch.
+          </p>
+          <div class="day-tags">
+            <span class="tag">PT Activation</span>
+            <span class="tag">A Step Forward</span>
+            <span class="tag">4 Squads</span>
+            <span class="tag">Dev as Tech Guide</span>
+            <span class="tag">Mad Pizza Festival</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="day-content">
+        <article class="event-row">
+          <div class="event-time">Morning // 08:30</div>
+          <div>
+            <h4 class="event-title">Team Breakfast &amp; PT Activation</h4>
+            <p class="event-desc">
+              Start the day together over breakfast, followed by a physical activation session run by our Personal Trainers to get everyone energized and focused for the build ahead.
+            </p>
+          </div>
+          <span class="event-pill">PT Session</span>
+        </article>
+
+        <article class="event-row highlight">
+          <div class="event-time">Kickoff // 09:45</div>
+          <div>
+            <h4 class="event-title">Main Event: <em>“A Step Forward”</em></h4>
+            <p class="event-desc">
+              A sharp, <strong>10-minute</strong> company session setting the stage, the vision, and the challenge for the day.
+            </p>
+          </div>
+          <span class="event-pill">10 Min Keynote</span>
+        </article>
+
+        <article class="event-row">
+          <div class="event-time">Draft // 10:00</div>
+          <div>
+            <h4 class="event-title">4 Squads: Tech Guides + Cross-Functional Builders</h4>
+            <p class="event-desc">
+              We form <strong>4 build squads</strong> led by our 5 Tech Guides (<strong>Akma, Franko, Mariia, Hugo, and Gonçalo</strong>), paired with a random selection of non-tech teammates (<strong>Duarte, João, Tomás, Isabel, Rita, Ana, Tiago, Marta, and Bia</strong>). <strong>Simão &amp; Pico</strong> roam across all teams to monitor, unblock, and jump in wherever needed. With our dev pipeline ready out of the box, everyone gets hands-on: shaping the flow, translations, copy, and testing side-by-side.
+            </p>
+          </div>
+          <span class="event-pill">Everyone Builds</span>
+        </article>
+
+        <article class="event-row">
+          <div class="event-time">On The Fly // 13:00+</div>
+          <div>
+            <h4 class="event-title">Mad Pizza Festival &amp; Rolling Dinner</h4>
+            <p class="event-desc">
+              No rigid breaks interrupting the flow. Lunch is a <strong>Mad Pizza Festival</strong> brought right to the workspace, and dinner happens on the fly as teams iterate.
+            </p>
+          </div>
+          <span class="event-pill">Mad Pizza</span>
+        </article>
+
+        <article class="event-row">
+          <div class="event-time">Late Hours // ∞</div>
+          <div>
+            <h4 class="event-title">Open-Ended Sprint — Goal: QA / Prod Ready</h4>
+            <p class="event-desc">
+              Teams can push as late as they want. The mission is simple: end the night with a working feature that is genuinely <strong>QA and Production ready</strong> for tomorrow morning’s pitch.
+            </p>
+          </div>
+          <span class="event-pill">QA / Prod Ready</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- DAY 03 -->
+    <section class="day-section" id="day-03">
+      <aside class="day-sidebar">
+        <div class="day-sidebar-sticky">
+          <span class="day-badge">Day 03 // The Pitch</span>
+          <div class="day-number">D—03</div>
+          <h3 class="day-name">5+5 Demos, 3 Votes Each &amp; First to Prod</h3>
+          <p class="day-summary">
+            Morning breakfast and PT reset, followed by crisp 10-minute team showcases (5m pitch + 5m Q&amp;A). Everyone gets 3 votes to crown the most interesting build that goes first into Production.
+          </p>
+          <div class="day-tags">
+            <span class="tag">PT Session II</span>
+            <span class="tag">5m Pitch + 5m Q&amp;A</span>
+            <span class="tag">3 Votes Per Person</span>
+            <span class="tag">First to Prod</span>
+            <span class="tag">Insparya Porto</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="day-content">
+        <article class="event-row">
+          <div class="event-time">Morning // 09:00</div>
+          <div>
+            <h4 class="event-title">Breakfast &amp; PT Morning Activation</h4>
+            <p class="event-desc">
+              Team breakfast followed by our PTs leading a morning activation session to shake off the late night and get everyone sharp for demo time.
+            </p>
+          </div>
+          <span class="event-pill">PT Reset</span>
+        </article>
+
+        <article class="event-row highlight">
+          <div class="event-time">Showtime // 10:30</div>
+          <div>
+            <h4 class="event-title">The Pitch &amp; Vote: <em>5 Min Demo + 5 Min Q&amp;A</em></h4>
+            <p class="event-desc">
+              Each of the 4 squads gets <strong>5 minutes to present and demo</strong> what they built, followed by <strong>5 minutes of Q&amp;A</strong>. Afterward, <strong>everyone in the room gets 3 votes</strong>—and we vote to decide which build is the most interesting to go <strong>first into Production</strong>.
+            </p>
+          </div>
+          <span class="event-pill">3 Votes · 1st to Prod</span>
+        </article>
+
+        <article class="event-row">
+          <div class="event-time">Afternoon // 13:00+</div>
+          <div>
+            <h4 class="event-title">Lunch, Insparya Porto Co-Working &amp; Departures</h4>
+            <p class="event-desc">
+              Celebrate over a final Porto lunch together. Afterward, anyone staying for the afternoon is welcome to work from <strong>Insparya Porto</strong>, while others head out for their travel arrangements home.
+            </p>
+          </div>
+          <span class="event-pill">Insparya / Travel</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- Manifesto Quote -->
+    <section class="manifesto">
+      <p class="manifesto-quote">
+        “One day to build together. Five minutes to pitch. Three votes each to decide what ships first to Production.”
+      </p>
+      <div class="manifesto-sub">A STEP FORWARD // PORTO EDITION</div>
+    </section>
+
+    <!-- Interactive Randomizers -->
+    <div class="section-header" id="randomizer">
+      <h2 class="section-title">Live Team Draw</h2>
+      <span class="section-index">[ 16 PEOPLE // 3 DINNER SQUADS &amp; 4 BUILD SQUADS ]</span>
+    </div>
+
+    <section class="interactive-grid">
+      <!-- Day 1 Kitchen Draft -->
+      <div class="interactive-panel">
+        <div class="panel-kicker">Day 01 Utility // 16 People → 3 Courses</div>
+        <h3 class="panel-title">Penthouse Dinner Draw</h3>
+        <p class="panel-desc">
+          Randomly divide the group into the 3 Penthouse Kitchen squads: Entrées, Main Courses, and Desserts.
+        </p>
+        <textarea class="textarea-input" id="dinnerNames">Akma, Franko, Mariia, Hugo, Gonçalo, Duarte, João, Tomás, Isabel, Rita, Ana, Tiago, Marta, Bia, Pico, Simão</textarea>
+        <button class="action-btn" onclick="shuffleDinner()">Draw 3 Kitchen Teams ↗</button>
+        <div class="results-grid" id="dinnerResults"></div>
+      </div>
+
+      <!-- Day 2 Hackathon Draft -->
+      <div class="interactive-panel">
+        <div class="panel-kicker">Day 02 Utility // 5 Tech Guides + 9 Non-Tech Builders</div>
+        <h3 class="panel-title">4-Squad Build Matcher</h3>
+        <p class="panel-desc">
+          4 Squads (3–4 people each) formed from 5 Tech Guides + 9 Non-Tech teammates. <strong>Simão &amp; Pico</strong> act as floating mentors &amp; support across all squads.
+        </p>
+        <textarea class="textarea-input" id="hackNames">DEVS: Akma, Franko, Mariia, Hugo, Gonçalo
+NON-TECH: Duarte, João, Tomás, Isabel, Rita, Ana, Tiago, Marta, Bia</textarea>
+        <button class="action-btn" onclick="shuffleHackathon()">Draw 4 Build Squads ↗</button>
+        <div class="results-grid five-cols" id="hackResults"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>PORTO TEAMBUILDING &amp; HACKATHON // A STEP FORWARD</div>
+    <div>16 PEOPLE · 4 SQUADS · BUILT TO SHIP</div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      const html = document.documentElement;
+      const isLight = html.getAttribute('data-theme') === 'light';
+      html.setAttribute('data-theme', isLight ? 'dark' : 'light');
+      themeToggle.textContent = isLight ? 'INVERT [B/W]' : 'INVERT [W/B]';
+    });
+
+    function fisherYates(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function parseList(raw) {
+      return raw
+        .split(/[\n,]+/)
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
+
+    function shuffleDinner() {
+      const raw = document.getElementById('dinnerNames').value;
+      const names = fisherYates(parseList(raw));
+      const courses = ['01 / Entrées', '02 / Main Courses', '03 / Desserts'];
+      const buckets = [[], [], []];
+      const fillOrder = [1, 0, 2]; // Fill Main Courses first
+      names.forEach((name, idx) => buckets[fillOrder[idx % 3]].push(name));
+
+      // Guarantee Main Courses strictly has the most people even if total % 3 !== 1
+      if (buckets[1].length <= buckets[0].length && buckets[0].length > 1) {
+        buckets[1].push(buckets[0].pop());
+      }
+
+      const container = document.getElementById('dinnerResults');
+      container.innerHTML = courses.map((course, i) => `
+        <div class="result-box">
+          <h4>${course}</h4>
+          <ul>
+            ${buckets[i].length ? buckets[i].map(n => `<li>→ ${n}</li>`).join('') : '<li>—</li>'}
+          </ul>
+        </div>
+      `).join('');
+    }
+
+    function shuffleHackathon() {
+      const raw = document.getElementById('hackNames').value.split('\n');
+      const devLine = (raw[0] || '').replace(/^DEVS\s*:\s*/i, '');
+      const nonTechLine = raw.slice(1).join(',').replace(/^NON-TECH\s*:\s*/i, '');
+
+      const devs = fisherYates(parseList(devLine));
+      const allNonTechs = parseList(nonTechLine);
+
+      const numSquads = 4;
+      const squads = Array.from({ length: numSquads }, (_, i) => ({
+        title: `Squad 0${i + 1}`,
+        devs: [],
+        members: []
+      }));
+
+      // Distribute 5 Devs across 4 squads (squads[0] gets 2 Devs, squads[1..3] get 1 Dev)
+      devs.forEach((dev, idx) => {
+        squads[idx % numSquads].devs.push(dev);
+      });
+
+      // Keep Duarte & Ana in the two 4-person squads (squads[0] has 2 Devs + 2 Non-Techs = 4; squads[1] has 1 Dev + 3 Non-Techs = 4)
+      const isProtected = name => /^(duarte|ana)$/i.test(name.trim());
+      const protectedMembers = fisherYates(allNonTechs.filter(isProtected));
+      const regularMembers = fisherYates(allNonTechs.filter(n => !isProtected(n)));
+
+      // Place regular members first to establish squad sizes (squads[0] = 4 people, squads[1] = 4 people, squads[2] = 3, squads[3] = 3)
+      const squadOrder = [1, 0, 2, 3];
+      const orderedNonTechs = [...protectedMembers, ...regularMembers];
+      orderedNonTechs.forEach((person, idx) => {
+        squads[squadOrder[idx % numSquads]].members.push(person);
+      });
+
+      const finalSquads = fisherYates(squads).map((s, i) => ({
+        ...s,
+        title: `Squad 0${i + 1}`,
+        members: fisherYates(s.members)
+      }));
+
+      const container = document.getElementById('hackResults');
+      container.innerHTML = finalSquads.map(s => `
+        <div class="result-box">
+          <h4>${s.title}</h4>
+          <ul>
+            ${s.devs.map(d => `<li><strong>[GUIDE] ${d}</strong></li>`).join('')}
+            ${s.members.map(m => `<li>+ ${m}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('') + `
+        <div class="result-box">
+          <h4>FLOATERS // HQ</h4>
+          <ul>
+            <li><strong>[OPS] Simão</strong></li>
+            <li><strong>[OPS] Pico</strong></li>
+          </ul>
+        </div>
+      `;
+    }
+
+    shuffleDinner();
+    shuffleHackathon();
+  </script>
+</body>
+</html>
