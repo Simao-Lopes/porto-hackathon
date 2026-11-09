@@ -624,6 +624,98 @@
       padding: 0.2rem 0;
     }
 
+    /* Build Kit (password-gated) */
+    .kit-pass-input {
+      min-height: 0;
+      padding: 0.75rem 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .kit-error {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ff5f5f;
+      margin-top: 0.9rem;
+    }
+
+    .kit-locked {
+      border: 1px dashed var(--border);
+      padding: 3.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      line-height: 1.9;
+    }
+
+    .kit-steps {
+      list-style: none;
+    }
+
+    .kit-steps li {
+      display: flex;
+      gap: 1.1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .kit-steps li:last-child {
+      border-bottom: none;
+    }
+
+    .kit-steps strong {
+      color: var(--fg);
+    }
+
+    .kit-step-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--fg);
+      line-height: 1.5;
+      flex-shrink: 0;
+    }
+
+    .cmd {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.45rem;
+      font-size: 0.78rem;
+      color: var(--fg);
+      white-space: nowrap;
+    }
+
+    .kit-skills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .kit-skill-desc {
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-right: 0.6rem;
+    }
+
+    .kit-note {
+      margin-top: 1.4rem;
+      padding-left: 0.9rem;
+      border-left: 2px solid var(--border-strong);
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
     /* Banner */
     .manifesto {
       padding: 5rem 2rem;
@@ -753,6 +845,7 @@
       <a href="#day-02">02 / A Step Forward</a>
       <a href="#day-03">03 / Pitch &amp; Ship</a>
       <a href="#randomizer">04 / Team Draw</a>
+      <a href="#build-kit">05 / Build Kit</a>
     </nav>
     <div class="topbar-right">
       <a class="theme-btn" href="https://maps.app.goo.gl/HMCohYQSuffw9U947" target="_blank" rel="noopener noreferrer">HQ MAP ↗</a>
@@ -1109,6 +1202,69 @@ NON-TECH: Duarte, João, Tomás, Isabel, Rita, Ana, Tiago, Marta, Bia</textarea>
         <div class="results-grid five-cols" id="hackResults"></div>
       </div>
     </section>
+
+    <!-- Devin Build Kit -->
+    <div class="section-header" id="build-kit">
+      <h2 class="section-title">Devin Build Kit</h2>
+      <span class="section-index">[ CLOUD AGENT // IDEA → SPEC → PR ]</span>
+    </div>
+
+    <section class="interactive-grid">
+      <div class="interactive-panel">
+        <div class="panel-kicker">Devin Cloud // Hackathon Plugin v1.2.0</div>
+        <h3 class="panel-title">Zero-Setup Build Agent</h3>
+        <p class="panel-desc">
+          All 4 squads ship with <strong>Devin running in the cloud</strong> — the hackathon plugin is already installed for the org, so there is nothing to download or configure on your laptop. Open Devin, describe your idea, and approve each step. Enter the squad passcode to unlock the full runbook.
+        </p>
+        <div id="kitLockWrap">
+          <input class="textarea-input kit-pass-input" type="password" id="kitPass" placeholder="SQUAD PASSCODE" autocomplete="off" />
+          <button class="action-btn" id="kitUnlockBtn">Unlock Runbook ↗</button>
+          <p class="kit-error" id="kitError" hidden>Access denied — wrong passcode</p>
+        </div>
+        <p class="kit-note" id="kitUnlockedNote" hidden>RUNBOOK UNLOCKED // Follow the steps on the right — Devin waits for your <span class="cmd">write:</span> and <span class="cmd">go:</span> words before writing anything.</p>
+      </div>
+
+      <div class="interactive-panel">
+        <div class="kit-locked" id="kitLocked">
+          [ LOCKED ]<br />Enter the squad passcode on the left to reveal the build runbook.
+        </div>
+        <div id="kitContent" hidden>
+          <div class="panel-kicker">Runbook // Idea → Spec → PR</div>
+          <h3 class="panel-title">How To Build</h3>
+          <p class="panel-desc">Three skills drive the whole flow. Just describe what you want in plain language and Devin picks the right one — or invoke them by name.</p>
+          <div class="kit-skills">
+            <span class="cmd">hackathon-idea</span><span class="kit-skill-desc">idea → spec PR</span>
+            <span class="cmd">hackathon-figma</span><span class="kit-skill-desc">design snapshot (auto)</span>
+            <span class="cmd">hackathon-build</span><span class="kit-skill-desc">code + product PRs</span>
+          </div>
+          <ol class="kit-steps">
+            <li>
+              <span class="kit-step-num">01</span>
+              <div><strong>Start a session.</strong> Go to <span class="cmd">app.devin.ai</span> and start a new session. The plugin is preinstalled in the org — no setup needed.</div>
+            </li>
+            <li>
+              <span class="kit-step-num">02</span>
+              <div><strong>Describe your idea</strong> — triggers <span class="cmd">hackathon-idea</span>. In plain words: what it does, who it is for, where it lives. Devin interviews you, then drafts a one-page <span class="cmd">spec.md</span> + <span class="cmd">plan.md</span> and proposes a slug.</div>
+            </li>
+            <li>
+              <span class="kit-step-num">03</span>
+              <div><strong>Approve the spec.</strong> Reply <span class="cmd">write: {slug}</span>. Devin pushes <span class="cmd">hackathon/{slug}/</span> on branch <span class="cmd">hack/{slug}</span> in <strong>erakulis-specs</strong> and opens the spec PR. If the spec names Figma screens, <span class="cmd">hackathon-figma</span> snapshots frames + variables automatically.</div>
+            </li>
+            <li>
+              <span class="kit-step-num">04</span>
+              <div><strong>Build</strong> — triggers <span class="cmd">hackathon-build</span>. Reply <span class="cmd">go: {slug}</span>. Devin creates <span class="cmd">hack/{slug}</span> branches in the product repos the spec names, implements the full feature with the repo's tests, runs lint + build + tests, pushes, and opens one PR per repo.</div>
+            </li>
+            <li>
+              <span class="kit-step-num">05</span>
+              <div><strong>Iterate.</strong> Keep asking for changes — they land on the same <span class="cmd">hack/{slug}</span> branches, no new <span class="cmd">go</span> needed. When a change alters behavior, Devin appends a delta to the spec instead of rewriting it.</div>
+            </li>
+          </ol>
+          <p class="kit-note">
+            Ground rules: everything lives on <span class="cmd">hack/{slug}</span> branches — never <span class="cmd">main</span>, never <span class="cmd">agent/</span> or <span class="cmd">release/</span> branches. Figma is optional and read-only. One spec per idea. Devin never merges — the PRs are definitive and you review them.
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -1225,6 +1381,28 @@ NON-TECH: Duarte, João, Tomás, Isabel, Rita, Ana, Tiago, Marta, Bia</textarea>
 
     shuffleDinner();
     shuffleHackathon();
+
+    // Build Kit passcode gate — compares SHA-256 of input, plaintext never stored.
+    const KIT_HASH = '7829eed6623dffead3fdd8743c0669d0bdc179385b2f8f903fffd93750a6b26a';
+    async function unlockKit() {
+      const input = document.getElementById('kitPass');
+      const err = document.getElementById('kitError');
+      const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input.value));
+      const hash = [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');
+      if (hash !== KIT_HASH) {
+        err.hidden = false;
+        input.select();
+        return;
+      }
+      document.getElementById('kitLockWrap').hidden = true;
+      document.getElementById('kitLocked').hidden = true;
+      document.getElementById('kitContent').hidden = false;
+      document.getElementById('kitUnlockedNote').hidden = false;
+    }
+    document.getElementById('kitUnlockBtn').addEventListener('click', unlockKit);
+    document.getElementById('kitPass').addEventListener('keydown', e => {
+      if (e.key === 'Enter') unlockKit();
+    });
   </script>
 </body>
 </html>
